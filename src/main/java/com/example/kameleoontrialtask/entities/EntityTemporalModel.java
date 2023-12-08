@@ -47,10 +47,12 @@ public class EntityTemporalModel {
 
     // additional methods for obtaining LocalDateTime from Instant taking into account the configured time zone:
 
+    @JsonIgnore
     public LocalDateTime getCreatedLocalDateTime() {
         return created.atZone(ZoneId.systemDefault()).toLocalDateTime();
     }
 
+    @JsonIgnore
     public LocalDateTime getUpdatedLocalDateTime() {
         return updated.atZone(ZoneId.systemDefault()).toLocalDateTime();
     }

@@ -1,27 +1,28 @@
 package com.example.kameleoontrialtask.entities;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
-@Table(name = "votes")
+@Table(name = "votes",
+        uniqueConstraints = @UniqueConstraint(columnNames = {"quote_id", "user_id"}))
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
-public class Vote {
+@Builder
+public class Vote extends EntityTemporalModel{
 
     @Id
     @SequenceGenerator(name = "vote_id_seq", sequenceName = "vote_id_seq")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "vote_id_seq")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "quote_id", nullable = false)
     private Quote quote;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 

@@ -19,10 +19,9 @@ public class User extends EntityTemporalModel {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_id_seq")
     private Long id;
 
-    @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String email;
 
     @JsonIgnore

@@ -10,7 +10,6 @@ import lombok.Setter;
 @Setter
 public class UserCreateRequest {
 
-    @NotBlank
     private String name;
 
     @NotBlank

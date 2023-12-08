@@ -2,17 +2,17 @@ package com.example.kameleoontrialtask.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
 @Entity
 @Table(name = "quotes")
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
+@Builder
 public class Quote extends EntityTemporalModel {
 
     @Id
@@ -23,11 +23,11 @@ public class Quote extends EntityTemporalModel {
     @Column(nullable = false)
     private String content;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "author_id", nullable = false)
     private User author;
 
-    @OneToMany(mappedBy = "quote")
+    @OneToMany(mappedBy = "quote", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Vote> votes;
 }
