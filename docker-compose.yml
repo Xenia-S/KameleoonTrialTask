@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  app:
+    build: .
+    ports:
+      - "8085:8085"
+    networks:
+      - kameleoon_network
+
+networks:
+  kameleoon_network:
+
